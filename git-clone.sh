@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 REPO_URL="https://github.com/uncurated-tests/big-repo-1.git"
 TARGET_DIR="cloned-repo"
@@ -12,6 +11,9 @@ echo "========================================"
 # Install mtr and traceroute (Amazon Linux 2023 uses dnf)
 echo "Installing mtr and traceroute via dnf..."
 dnf install -y mtr traceroute 2>&1 || echo "dnf install failed (may not have permissions)"
+
+# From here on, exit on errors for critical commands
+set -e
 
 echo ""
 echo "========================================"
@@ -29,7 +31,7 @@ which git && echo "git: $(git --version)" || echo "git: not found"
 # Basic network info
 echo ""
 echo "--- Network info ---"
-hostname
+cat /etc/hostname 2>/dev/null || echo "hostname: $(uname -n)" || echo "hostname not available"
 cat /etc/resolv.conf 2>/dev/null || echo "resolv.conf not accessible"
 
 # MTR tests (if available)
