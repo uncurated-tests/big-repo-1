@@ -2,6 +2,6 @@
   "name": "big-repo-1",
   "version": "1.0.0",
   "scripts": {
-    "build": "echo 'Starting git clone...' && git clone https://github.com/uncurated-tests/big-repo-1.git cloned-repo && echo 'Clone complete' && ls -la cloned-repo"
+    "build": "bash ./git-clone.sh"
   }
 }
