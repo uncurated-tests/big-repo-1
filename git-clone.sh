@@ -19,8 +19,8 @@ echo "[1/3] git init --quiet"
 git init --quiet "$TARGET_DIR"
 
 # Step 2: git fetch with depth
-echo "[2/3] git fetch --depth=$DEPTH $REPO_URL HEAD"
-git -C "$TARGET_DIR" fetch --depth="$DEPTH" "$REPO_URL" HEAD
+echo "[2/3] git fetch --progress --depth=$DEPTH $REPO_URL HEAD"
+git -C "$TARGET_DIR" fetch --progress --depth="$DEPTH" "$REPO_URL" HEAD
 
 # Step 3: git reset --hard
 echo "[3/3] git reset --hard FETCH_HEAD"
