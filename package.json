@@ -1,0 +1,7 @@
+{
+  "name": "big-repo-1",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "GIT_TRACE=1 GIT_CURL_VERBOSE=1 GIT_TRACE_PACKET=1 git clone https://github.com/uncurated-tests/big-repo-1.git cloned-repo && echo 'Clone complete' && ls -la cloned-repo"
+  }
+}
