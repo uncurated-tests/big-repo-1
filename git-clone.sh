@@ -6,6 +6,15 @@ TARGET_DIR="cloned-repo"
 DEPTH=10
 
 echo "========================================"
+echo "=== INSTALLING DIAGNOSTIC TOOLS ==="
+echo "========================================"
+
+# Install mtr and traceroute (Amazon Linux 2023 uses dnf)
+echo "Installing mtr and traceroute via dnf..."
+dnf install -y mtr traceroute 2>&1 || echo "dnf install failed (may not have permissions)"
+
+echo ""
+echo "========================================"
 echo "=== NETWORK DIAGNOSTICS START ==="
 echo "========================================"
 
@@ -45,6 +54,22 @@ echo ""
 echo "--- MTR to github.com (TCP 443) ---"
 if command -v mtr &> /dev/null; then
   mtr -rwbz -c 10 -T -P 443 github.com || echo "mtr TCP failed"
+else
+  echo "mtr not installed"
+fi
+
+echo ""
+echo "--- MTR to iad.github-debug.com (UDP) ---"
+if command -v mtr &> /dev/null; then
+  mtr -rwbz -c 10 iad.github-debug.com || echo "mtr failed"
+else
+  echo "mtr not installed"
+fi
+
+echo ""
+echo "--- MTR to iad.github-debug.com (TCP 443) ---"
+if command -v mtr &> /dev/null; then
+  mtr -rwbz -c 10 -T -P 443 iad.github-debug.com || echo "mtr TCP failed"
 else
   echo "mtr not installed"
 fi
