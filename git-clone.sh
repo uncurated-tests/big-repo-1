@@ -110,7 +110,7 @@ echo "[1/3] git init --quiet"
 START_INIT=$(date +%s.%N)
 git init --quiet "$TARGET_DIR"
 END_INIT=$(date +%s.%N)
-echo "  Duration: $(echo "$END_INIT - $START_INIT" | bc)s"
+echo "  Duration: $(awk "BEGIN {printf \"%.2f\", $END_INIT - $START_INIT}")s"
 
 # Step 2: git fetch with depth
 echo ""
@@ -118,7 +118,7 @@ echo "[2/3] git fetch --progress --depth=$DEPTH $REPO_URL HEAD"
 START_FETCH=$(date +%s.%N)
 git -C "$TARGET_DIR" fetch --progress --depth="$DEPTH" "$REPO_URL" HEAD
 END_FETCH=$(date +%s.%N)
-FETCH_DURATION=$(echo "$END_FETCH - $START_FETCH" | bc)
+FETCH_DURATION=$(awk "BEGIN {printf \"%.2f\", $END_FETCH - $START_FETCH}")
 echo "  Duration: ${FETCH_DURATION}s"
 
 # Step 3: git reset --hard
@@ -127,7 +127,7 @@ echo "[3/3] git reset --hard FETCH_HEAD"
 START_RESET=$(date +%s.%N)
 git -C "$TARGET_DIR" reset --hard FETCH_HEAD
 END_RESET=$(date +%s.%N)
-echo "  Duration: $(echo "$END_RESET - $START_RESET" | bc)s"
+echo "  Duration: $(awk "BEGIN {printf \"%.2f\", $END_RESET - $START_RESET}")s"
 
 echo ""
 echo "========================================"
