@@ -2,6 +2,6 @@
   "name": "big-repo-1",
   "version": "1.0.0",
   "scripts": {
-    "build": "bash ./git-clone.sh && mkdir -p public && echo 'ok' > public/index.html"
+    "build": "mkdir -p public && echo 'ok' > public/index.html"
   }
 }
